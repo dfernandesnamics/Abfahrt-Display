@@ -32,25 +32,27 @@
 				$timestamp = strtotime($timestampUrl);
 			}
 			$uhrzeit = date("H:i", $timestamp);
-
-			switch ($reload) {
-				case "true":
-					$link = "http://tramabfahrten.nx/";
-					break;
-				case null:
-					$link = "http://tramabfahrten.nx/?autoreload=true";
-					break;
-				default:
-					$link = "http://tramabfahrten.nx/";
-			}
 			
-			echo "<a href='$link'>" .
-				"<h1 style='text-align: center'>"
-				. $uhrzeit .
-				"</h1>" .
-				"</a>"
 			?>
 
+			<a href="
+			<?php
+			$url = null;
+			if ($reload == 'true') {
+				$url = ".";
+			}
+			elseif (!isset($reload)) {
+				$url = "?autoreload=true";
+			}
+			echo $url;
+			?>
+				">
+				<h1 style='text-align:center'>
+					<?php
+					echo $uhrzeit;
+					?>
+				</h1>
+			</a>
 		</div>
 	</div>
 	<div class="row">
