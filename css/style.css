@@ -17,8 +17,24 @@
   margin: 0 auto;
   float: none; }
 
+@keyframes bus {
+  10% {
+    transform: translate3d(-1px, 0, -3px) scale(1); }
+  20% {
+    transform: translate3d(2px, 0, 0) scale(1.05); }
+  40% {
+    transform: translate3d(4px, 0, 0) scale(1.1); }
+  60% {
+    transform: translate3d(4px, 0, 0) scale(1.15); }
+  80% {
+    transform: translate3d(2px, 0, 0) scale(1.2); }
+  90% {
+    transform: translate3d(-1px, 0, -3px) scale(1.25); }
+  100% {
+    transform: translate3d(-1px, 0, -3px) scale(1.3); } }
 .icon-bus3 {
-  font-size: 5rem; }
+  font-size: 5rem;
+  animation: bus 3s infinite; }
 
 a,
 a:link,

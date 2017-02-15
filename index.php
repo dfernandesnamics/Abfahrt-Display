@@ -96,18 +96,18 @@
 		$haltestelle = new Haltestelle;
 		?>
 		<?php
-		$haltestelle->wartezeitBerechnung(2, 10);
+		$haltestelle->wartezeitBerechnung(2, 1);
 		?>
 	</div>
 	<div class="row">
 
 		<?php
-		$haltestelle->wartezeitBerechnung(14, 5);
+		$haltestelle->wartezeitBerechnung(14, 1);
 		?>
 	</div>
 	<div class="row">
 		<?php
-		$haltestelle->wartezeitBerechnung(3, 2);
+		$haltestelle->wartezeitBerechnung(3, 1);
 		?>
 	</div>
 </div>

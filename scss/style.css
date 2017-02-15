@@ -1,31 +1,44 @@
 .container-fluid {
-  color: #ff8c00;
-  background-color: #282828;
-  height: 100vh; }
+	color: #ff8c00;
+	background-color: #282828;
+	height: 100vh;
+}
 
 .tramnr, .wartezeit {
-  text-align: right; }
+	text-align: right;
+}
 
 .tramnr, .endhaltestelle, .wartezeit {
-  font-size: 5rem;
-  font-weight: bolder; }
+	font-size: 5rem;
+	font-weight: bolder;
+}
 
 .time-banner {
-  color: white; }
+	color: white;
+}
 
 .container-fluid.row {
-  margin: 0 auto;
-  float: none; }
+	margin: 0 auto;
+	float: none;
+}
 
 .icon-bus3 {
-  font-size: 5rem; }
+	font-size: 5rem;
+}
+
+.icon-bus3 {
+	
+}
+
+/*{ transform: scale(1.1); }*/
 
 a,
 a:link,
 a:visited,
 a:hover,
 a:active {
-  text-decoration: none;
-  color: white; }
+	text-decoration: none;
+	color: white;
+}
 
 /*# sourceMappingURL=style.css.map */
