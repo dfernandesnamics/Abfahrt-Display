@@ -54,6 +54,9 @@
 				</h1>
 			</a>
 		</div>
+        
+        <h1><a href='<?php ( !isset($_GET['autoreload'])) ? print "?autoreload=true" : print "." ?> '><?=$uhrzeit?></a></h1>
+        
 	</div>
 	<div class="row">
 		<?php
