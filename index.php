@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 	<?php
-	$reload = $_GET['autoreload'];
+	$reload = (isset($_GET['autoreload'])) ? $_GET['autoreload'] : null;
 	if ($reload == "true") {
 		echo "<meta http-equiv=\"refresh\" content=\"5\">";
 	}
