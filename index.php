@@ -6,7 +6,7 @@
 	<?php
 	$reload = $_GET['autoreload'];
 	if ($reload == "true") {
-		echo "<meta http-equiv=\"refresh\" content=\"1\">";
+		echo "<meta http-equiv=\"refresh\" content=\"5\">";
 	}
 	?>
 	<title>Tram Abfahrten</title>
