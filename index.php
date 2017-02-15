@@ -10,9 +10,9 @@
 	}
 	?>
 	<title>Tram Abfahrten</title>
-	<link rel="stylesheet" type="text/css" href="/css/style.css?<?php echo time(); ?>">
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="/css/fonts/style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css?<?php echo time(); ?>">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/fonts/style.css">
 
 </head>
 <body>
