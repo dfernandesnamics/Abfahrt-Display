@@ -23,7 +23,7 @@
 
 
 			$timestampSys = time();
-			$timestampUrl = $_GET["time"];
+			$timestampUrl = (isset($_GET["time"])) ? $_GET["time"] : null;
 
 
 			if ($timestampUrl == null) {
