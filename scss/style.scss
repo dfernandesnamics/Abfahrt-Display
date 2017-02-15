@@ -1,0 +1,28 @@
+.container-fluid {
+	color: #ff8c00;
+	background-color: #282828;
+	height: 100vh;
+}
+
+.tramnr, .wartezeit {
+	text-align: right;
+}
+
+.tramnr, .endhaltestelle, .wartezeit {
+	font-size: 5rem;
+	font-weight: bolder;
+}
+
+.time-banner {
+	color: white;
+}
+
+.container-fluid.row {
+	margin: 0 auto;
+	float: none;
+}
+
+.icon-bus3 {
+	font-size: 5rem;
+}
+
