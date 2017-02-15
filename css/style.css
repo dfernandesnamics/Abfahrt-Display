@@ -20,4 +20,12 @@
 .icon-bus3 {
   font-size: 5rem; }
 
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: white; }
+
 /*# sourceMappingURL=style.css.map */

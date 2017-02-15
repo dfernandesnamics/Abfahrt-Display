@@ -32,8 +32,25 @@
 				$timestamp = strtotime($timestampUrl);
 			}
 			$uhrzeit = date("H:i", $timestamp);
-			echo "<h1 style='text-align: center'>" . $uhrzeit . "</h1>";
+
+			switch ($reload) {
+				case "true":
+					$link = "http://tramabfahrten.nx/";
+					break;
+				case null:
+					$link = "http://tramabfahrten.nx/?autoreload=true";
+					break;
+				default:
+					$link = "http://tramabfahrten.nx/";
+			}
+			
+			echo "<a href='$link'>" .
+				"<h1 style='text-align: center'>"
+				. $uhrzeit .
+				"</h1>" .
+				"</a>"
 			?>
+
 		</div>
 	</div>
 	<div class="row">
@@ -64,7 +81,7 @@
 					echo sprintf($GLOBALS['busankunftformat'], $tramnr, $endhaltestellen[$tramnr], $wartezeitankunft);
 				} else {
 
-					echo sprintf($GLOBALS['format'], $tramnr, $endhaltestellen[$tramnr], $wartezeitankunft/60);
+					echo sprintf($GLOBALS['format'], $tramnr, $endhaltestellen[$tramnr], $wartezeitankunft / 60);
 				}
 			}
 
