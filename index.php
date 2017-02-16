@@ -66,7 +66,7 @@
 
 		$GLOBALS['busankunftformat'] = "<div class='tramnr col-xs-offset-2 col-xs-1'>" . '%s' . "</div>" .
 			"<div class='endhaltestelle col-xs-6'>" . '%s' . "</div>" .
-			"<div class='wartezeit col-xs-pull-2 col-xs-3 icon-bus3'></div>";
+			"<div class='wartezeit col-xs-pull-2 col-xs-3'><div class='bus-parent'><div class='icon-bus3'></div></div></div>";
 
 		class Haltestelle
 		{
@@ -82,7 +82,7 @@
 			function printdauer($wartezeitankunft, $tramnr)
 			{
 				$endhaltestellen = [2 => "Farbhof", 14 => "Triemli", 3 => "Albisrieden"];
-				if ($wartezeitankunft < 30) {
+				if ($wartezeitankunft < 59) {
 					echo sprintf($GLOBALS['busankunftformat'], $tramnr, $endhaltestellen[$tramnr], $wartezeitankunft);
 				} else {
 
@@ -96,13 +96,13 @@
 		$haltestelle = new Haltestelle;
 		?>
 		<?php
-		$haltestelle->wartezeitBerechnung(2, 1);
+		$haltestelle->wartezeitBerechnung(2, 10);
 		?>
 	</div>
 	<div class="row">
 
 		<?php
-		$haltestelle->wartezeitBerechnung(14, 1);
+		$haltestelle->wartezeitBerechnung(14, 5);
 		?>
 	</div>
 	<div class="row">
