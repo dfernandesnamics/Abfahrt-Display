@@ -57,21 +57,21 @@
 
 	</div>
 	<?php
-	$GLOBALS['format'] = "<div class='row'><div class='tramnr col-xs-offset-2 col-xs-1'>" . '%d' . "</div>" .
+	$GLOBALS['standardFormat'] = "<div class='row'><div class='tramnr col-xs-offset-2 col-xs-1'>" . '%d' . "</div>" .
 		"<div class='endhaltestelle col-xs-6'>" . '%s' . "</div>" .
 		"<div class='wartezeit col-xs-pull-2 col-xs-3 '>" . '%d\'' . "</div></div>";
 
-	$GLOBALS['tramankunftformat'] = "<div class='row'><div class='tramnr col-xs-offset-2 col-xs-1'>" . '%d' . "</div>" .
+	$GLOBALS['tramAnkunftFormat'] = "<div class='row'><div class='tramnr col-xs-offset-2 col-xs-1'>" . '%d' . "</div>" .
 		"<div class='endhaltestelle col-xs-6'>" . '%s' . "</div>" .
 		"<div class='wartezeit col-xs-pull-2 col-xs-3'><div class='bus-parent'><div class='icon-bus3'></div></div></div></div>";
 	
 	
-	//Array wird Zentral initialisiert damit die Daten hinzugefügt werden pro Tram und nicht 3 mal ausgeführt wird. (Beispiel: 10, 10 20, 10 20 30)
+	// Array wird Zentral initialisiert damit die Daten hinzugefügt werden pro Tram und nicht 3 mal ausgeführt wird. (Beispiel: 10, 10 20, 10 20 30)
 	$GLOBALS['warteZeit'] = [];
 
 	class Haltestelle
 	{
-		//Iterativ
+		// Iterativ
 		// In dieser Funktion habe ich meine Daten für die Abfahrt -> Loop durch, wandle sie in timestamps um und frage ab,
 		// ob die Abfahrts Zeit grösser ist als der Momentane Timestamp, wenn ja --> initialisiere ich die nächste funktion,
 		// gebe die parameter weiter (wartezeitBerechnung) die gebraucht werden und dan break; um den Loop zu beenden. 
@@ -83,11 +83,11 @@
 
 					"0845", "1130", "1032", "1225", "1232", "1239", "1246", "1253",
 					"1300", "1307", "1314", "1321", "1328", "1335", "1342", "1349", "1356",
-					"1403", "1410", "1417", "1424", "1431", "1438", "1445", "1452", "1530"
+					"1403", "1410", "1417", "1424", "1431", "1438", "1445", "1452", "1530", "1625"
 				],
 				5 => [
 
-					"0840", "1040", "2220", "2227", "2234", "2241", "2248", "2255",
+					"0840", "1040", "1612", "2227", "2234", "2241", "2248", "2255",
 					"2302", "2309", "2316", "2323", "2330", "2337", "2344", "2351", "2358"
 				],
 				13 => [
@@ -106,7 +106,7 @@
 			}
 
 		}
-		//Iterativ
+		// Iterativ
 		// Hier benutze ich die übergebene AbfahrtsZeit und den Momentanen Timestamp um die Wartezeit zu berechnen.
 		// Diese Warte Zeit füge ich dem Array 'warteZeit' + gebe noch die Tramnummer als Key mit,
 		// danach Initialisiere ich die nächste Funktion (printdauer) und gebe die Parameter mit.
@@ -115,20 +115,23 @@
 
 			$warteZeit = $abfahrtsZeit - $GLOBALS['timestamp'];
 			$GLOBALS['warteZeit'][$tramnr] = $warteZeit;
-			$this->printdauer($warteZeit, $tramnr);
+//			$this->printdauer($warteZeit, $tramnr);
 
 		}
-		//Iterativ
-		//Hier definiere ich die Endhaltestellen der Trams und meine Ausgaben (sprintf),
+		
+		
+		
+		// Iterativ
+		// Hier definiere ich die Endhaltestellen der Trams und meine Ausgaben (sprintf),
 		// und erstelle die Abfrage ob das Tram bald Ankommt oder noch nicht da ist und gebe dan die passende Variable (die mit sprintf) mit.
 		function printdauer($wartezeitankunft, $tramnr)
 		{
-			$endhaltestellen = [17 => "Werdhölzli", 13 => "Frankental", 5 => "Laubegg"];
-
-
+			$endhaltstellen = [17 => "Werdhölzli", 13 => "Frankental", 5 => "Laubegg"];
+			
+			
 //			print_r($GLOBALS['warteZeit']);
-			$trBD = sprintf($GLOBALS['tramankunftformat'], $tramnr, $endhaltestellen[$tramnr], $wartezeitankunft);
-			$trND = sprintf($GLOBALS['format'], $tramnr, $endhaltestellen[$tramnr], $wartezeitankunft / 60);
+			$trBD = sprintf($GLOBALS['tramAnkunftFormat'], $tramnr, $endhaltstellen[$tramnr], $GLOBALS['warteZeit'][$tramnr]);
+			$trND = sprintf($GLOBALS['standardFormat'], $tramnr, $endhaltstellen[$tramnr], $GLOBALS['warteZeit'][$tramnr] / 60);
 			if ($wartezeitankunft < 30) {
 				echo $trBD;
 			} else {
@@ -137,16 +140,17 @@
 			}
 		}
 		// Nicht Iterativ
-		//In dieser Funktion sortiere ich den Array mit den Wartezeiten loop durch und gebe diese aus.
-		//Diese Function ist von den anderen abgelegen* und wird deswegen nur 1 mal ausgeführt. 
-		
+		// In dieser Funktion sortiere ich den Array mit den Wartezeiten loop durch und gebe diese aus.
+		// Diese Function ist von den anderen abgelegen* und wird deswegen nur 1 mal ausgeführt.
 		// *(sie wird icht von einer anderen funktion initialisiert. nur 1 mal von mir am Schluss der Funktion aufrufe**)
 		function printit()
 		{
 			asort($GLOBALS['warteZeit']);
-			foreach ($GLOBALS['warteZeit'] as $i) {
-				echo $i . " ";
+			foreach ($GLOBALS['warteZeit'] as $key => $val) {
+				$this->printdauer($val, $key);
 			}
+//			print_r($GLOBALS['warteZeit']);
+			
 		}
 		
 
