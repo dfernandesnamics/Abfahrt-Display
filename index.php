@@ -71,9 +71,10 @@
 
 	class Haltestelle
 	{
+		//Iterativ
 		// In dieser Funktion habe ich meine Daten für die Abfahrt -> Loop durch, wandle sie in timestamps um und frage ab,
 		// ob die Abfahrts Zeit grösser ist als der Momentane Timestamp, wenn ja --> initialisiere ich die nächste funktion,
-		// gebe die parameter weiter die gebraucht werden und dan break; um den Loop zu beenden. 
+		// gebe die parameter weiter (wartezeitBerechnung) die gebraucht werden und dan break; um den Loop zu beenden. 
 		function wartezeitVorbereitung($tramnr)
 		{
 
@@ -105,9 +106,10 @@
 			}
 
 		}
+		//Iterativ
 		// Hier benutze ich die übergebene AbfahrtsZeit und den Momentanen Timestamp um die Wartezeit zu berechnen.
 		// Diese Warte Zeit füge ich dem Array 'warteZeit' + gebe noch die Tramnummer als Key mit,
-		// danach Initialisiere ich die nächste Funktion und gebe die Parameter mit.
+		// danach Initialisiere ich die nächste Funktion (printdauer) und gebe die Parameter mit.
 		function wartezeitBerechnung($tramnr, $abfahrtsZeit)
 		{
 
@@ -116,7 +118,7 @@
 			$this->printdauer($warteZeit, $tramnr);
 
 		}
-
+		//Iterativ
 		//Hier definiere ich die Endhaltestellen der Trams und meine Ausgaben (sprintf),
 		// und erstelle die Abfrage ob das Tram bald Ankommt oder noch nicht da ist und gebe dan die passende Variable (die mit sprintf) mit.
 		function printdauer($wartezeitankunft, $tramnr)
@@ -134,6 +136,7 @@
 				echo $trND;
 			}
 		}
+		// Nicht Iterativ
 		//In dieser Funktion sortiere ich den Array mit den Wartezeiten loop durch und gebe diese aus.
 		//Diese Function ist von den anderen abgelegen* und wird deswegen nur 1 mal ausgeführt. 
 		
@@ -150,9 +153,11 @@
 	}
 	//Hier sind meine Function Calls.
 	$haltestelle = new Haltestelle;
+	//*Wird an wartezeitVorbereitung weitergegeben mit tramnr als parameter**
 	$haltestelle->wartezeitVorbereitung(17);
 	$haltestelle->wartezeitVorbereitung(5);
 	$haltestelle->wartezeitVorbereitung(13);
+	//***********************************************************************
 	$haltestelle->printit();   // ** Hier 
 
 	?>
