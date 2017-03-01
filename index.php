@@ -68,6 +68,7 @@
 
 	class Haltestelle
 	{
+
 		function wartezeitVorbereitung($tramnr)
 		{
 
@@ -80,11 +81,11 @@
 				],
 				5 => [
 
-					"0840", "2213", "2220", "2227", "2234", "2241", "2248", "2255",
+					"0840", "1040", "2220", "2227", "2234", "2241", "2248", "2255",
 					"2302", "2309", "2316", "2323", "2330", "2337", "2344", "2351", "2358"
 				],
 				13 => [
-					"0837", "1609", "1616", "1623", "1630", "1637", "1644", "1651", "1658",
+					"0837", "1020", "1100", "1623", "1630", "1637", "1644", "1651", "1658",
 					"1705", "1712", "1719", "1726", "1733", "1740", "1747", "1754",
 					"1801", "1808", "1815", "1822", "1829", "1836", "1843", "1850", "1857"
 
@@ -111,15 +112,14 @@
 
 		function sortAbfahrten($abfahrtsZeit, $tramnr)
 		{
-			asort($GLOBALS['warteZeit'], SORT_NUMERIC);
-			
+			asort($GLOBALS['warteZeit']);
 			print_r($GLOBALS['warteZeit']);
 			$this->printdauer($abfahrtsZeit, $tramnr);
 		}
 //			foreach ($GLOBALS['warteZeit'] as $key => $val) {
 //				$GLOBALS['warteZeit'][$tramnr] = $val;
 //			}
-			
+
 		function printdauer($wartezeitankunft, $tramnr)
 		{
 			$endhaltestellen = [17 => "Werdhölzli", 13 => "Frankental", 5 => "Laubegg"];
@@ -134,10 +134,10 @@
 	}
 
 	$haltestelle = new Haltestelle;
-
 	$haltestelle->wartezeitVorbereitung(17);
 	$haltestelle->wartezeitVorbereitung(5);
 	$haltestelle->wartezeitVorbereitung(13);
+
 	?>
 </div>
 </body>
