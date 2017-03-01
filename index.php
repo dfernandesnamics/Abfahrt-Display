@@ -74,17 +74,17 @@
 			$arr = [
 				17 => [
 
-					"1025", "1030", "1032", "1225", "1232", "1239", "1246", "1253",
+					"0845", "1030", "1032", "1225", "1232", "1239", "1246", "1253",
 					"1300", "1307", "1314", "1321", "1328", "1335", "1342", "1349", "1356",
 					"1403", "1410", "1417", "1424", "1431", "1438", "1445", "1452", "1530"
 				],
 				5 => [
 
-					"2206", "2213", "2220", "2227", "2234", "2241", "2248", "2255",
+					"0840", "2213", "2220", "2227", "2234", "2241", "2248", "2255",
 					"2302", "2309", "2316", "2323", "2330", "2337", "2344", "2351", "2358"
 				],
 				13 => [
-					"1602", "1609", "1616", "1623", "1630", "1637", "1644", "1651", "1658",
+					"0837", "1609", "1616", "1623", "1630", "1637", "1644", "1651", "1658",
 					"1705", "1712", "1719", "1726", "1733", "1740", "1747", "1754",
 					"1801", "1808", "1815", "1822", "1829", "1836", "1843", "1850", "1857"
 
@@ -105,7 +105,7 @@
 		{
 			$GLOBALS['warteZeit'] = [];
 			$difference = $abfahrtsZeit - $GLOBALS['timestamp'];
-			array_push($GLOBALS['warteZeit'], $difference);
+			array_push($GLOBALS['warteZeit'], $tramnr, $difference);
 
 			print_r($GLOBALS['warteZeit']);
 			$this->sortAbfahrten($difference, $tramnr, $difference);
@@ -114,21 +114,11 @@
 
 		function sortAbfahrten($abfahrtsZeit, $tramnr, $difference)
 		{
-			function cmp($a, $b)
-			{
-				if ($a > $b) {
-					return 1;
-				}
-				else{
-					return 0;
-				}
+			asort($GLOBALS['warteZeit'], SORT_NUMERIC);
+			foreach ($GLOBALS['warteZeit'][$tramnr] as $key => $val) {
+				$key = $val;
 			}
-
-			uasort($GLOBALS['warteZeit'], 'cmp');
-			foreach ($GLOBALS['warteZeit'] as $key => $val) {
-				echo "$key: $val";
-			}
-
+			print_r($GLOBALS['warteZeit']);
 			$this->printdauer($abfahrtsZeit, $tramnr);
 		}
 
