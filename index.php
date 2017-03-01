@@ -57,11 +57,11 @@
 
 	</div>
 	<?php
-	$GLOBALS['format'] = "<div class='row'><div class='tramnr col-xs-offset-2 col-xs-1'>" . '%s' . "</div>" .
+	$GLOBALS['format'] = "<div class='row'><div class='tramnr col-xs-offset-2 col-xs-1'>" . '%d' . "</div>" .
 		"<div class='endhaltestelle col-xs-6'>" . '%s' . "</div>" .
 		"<div class='wartezeit col-xs-pull-2 col-xs-3 '>" . '%d\'' . "</div></div>";
 
-	$GLOBALS['tramankunftformat'] = "<div class='row'><div class='tramnr col-xs-offset-2 col-xs-1'>" . '%s' . "</div>" .
+	$GLOBALS['tramankunftformat'] = "<div class='row'><div class='tramnr col-xs-offset-2 col-xs-1'>" . '%d' . "</div>" .
 		"<div class='endhaltestelle col-xs-6'>" . '%s' . "</div>" .
 		"<div class='wartezeit col-xs-pull-2 col-xs-3'><div class='bus-parent'><div class='icon-bus3'></div></div></div></div>";
 
@@ -103,25 +103,23 @@
 
 		function wartezeitBerechnung($tramnr, $abfahrtsZeit)
 		{
-			$GLOBALS['warteZeit'] = [];
 			$difference = $abfahrtsZeit - $GLOBALS['timestamp'];
-			array_push($GLOBALS['warteZeit'], $tramnr, $difference);
-
-			print_r($GLOBALS['warteZeit']);
-			$this->sortAbfahrten($difference, $tramnr, $difference);
+			$GLOBALS['warteZeit'][$tramnr] = $difference;
+			$this->sortAbfahrten($difference, $tramnr);
 
 		}
 
-		function sortAbfahrten($abfahrtsZeit, $tramnr, $difference)
+		function sortAbfahrten($abfahrtsZeit, $tramnr)
 		{
 			asort($GLOBALS['warteZeit'], SORT_NUMERIC);
-			foreach ($GLOBALS['warteZeit'][$tramnr] as $key => $val) {
-				$key = $val;
-			}
+			
 			print_r($GLOBALS['warteZeit']);
 			$this->printdauer($abfahrtsZeit, $tramnr);
 		}
-
+//			foreach ($GLOBALS['warteZeit'] as $key => $val) {
+//				$GLOBALS['warteZeit'][$tramnr] = $val;
+//			}
+			
 		function printdauer($wartezeitankunft, $tramnr)
 		{
 			$endhaltestellen = [17 => "Werdhölzli", 13 => "Frankental", 5 => "Laubegg"];
@@ -137,8 +135,8 @@
 
 	$haltestelle = new Haltestelle;
 
-	$haltestelle->wartezeitVorbereitung(5);
 	$haltestelle->wartezeitVorbereitung(17);
+	$haltestelle->wartezeitVorbereitung(5);
 	$haltestelle->wartezeitVorbereitung(13);
 	?>
 </div>
