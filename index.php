@@ -5,19 +5,21 @@
 	<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 
 	<?php
-	
-	//reload variable definieren -> abfrage ob sie gesetzt ist wenn ja -> $_GET['autoreload'] else -> null setzten
-	//else autoreload true setzen
-	
+
+	// reload variable definieren -> abfrage ob sie gesetzt ist wenn ja -> $_GET['autoreload'] else -> null setzten
+	// else autoreload true setzen
+
 	$reload = (isset($_GET['autoreload'])) ? $_GET['autoreload'] : null;
-	
-	//abfrage ob reload True ist, wenn ja -> autoreload aktivieren
-	
+
+	// abfrage ob reload True ist, wenn ja -> autoreload aktivieren
+
 	if ($reload == "true") {
 		echo "<meta http-equiv=\"refresh\" content=\"5\">";
 	}
+	$titleFormat = '%d' . " - " . '%s' . ": " . '$d\'';
+	$title = sprintf($titleFormat, $tramnr, $endhaltestelle[$tramnr], $wartezeit / 60);
 	?>
-	<title>Tram Abfahrten</title>
+	<title><?php echo $title; ?></title>
 	<link rel="stylesheet" type="text/css" href="css/style.css?<?php echo time(); ?>">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/fonts/style.css">
@@ -27,15 +29,15 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="time-banner col-lg-12">
-			
+
 			<?php
 
-			//Zeit Variabeln definieren
+			// Zeit Variabeln definieren
 			$timestampSys = time();
-			//Gleiche abfrage wue bei autoreload
+			//Gleiche abfrage wie bei autoreload
 			$timestampUrl = (isset($_GET["time"])) ? $_GET["time"] : null;
 
-			//damit es immer eine Zeit gibt die benutzt wird frage ich ab ob die URL $VAR gleich null ist, true -> systemzeit nehmen, else -> url var in timestamp umwandeln.
+			// damit es immer eine Zeit gibt die benutzt wird frage ich ab ob die URL $VAR gleich null ist, true -> systemzeit nehmen, else -> url var in timestamp umwandeln.
 			if ($timestampUrl == null) {
 				$timestamp = $timestampSys;
 			} else {
@@ -44,8 +46,8 @@
 			$uhrzeit = date("H:i", $timestamp);
 
 			?>
-			
-<!--			Click auf uhr ändert den metatag und den Link auf autoreload on/off-->
+
+			<!--			Click auf uhr ändert den metatag und den Link auf autoreload on/off-->
 			<a href="
 			<?php
 			$url = null;
@@ -69,8 +71,8 @@
 	</div>
 	<?php
 
-	//format für meine ausgaben definieren Fall 1: tram braucht > 30s Fall2: < 30s (%vars sind die werte die mit dem sprintf definition ausgetausch werden)
-	
+	// format für meine ausgaben definieren Fall 1 (Standardformat): tram braucht > 30s Fall2 (Tramankunftsformat): < 30s (%vars sind die werte die in der sprintf definition ausgetausch werden)
+
 	$GLOBALS['standardFormat'] = "<div class='row'><div class='tramnr col-xs-offset-2 col-xs-1'>" . '%d' . "</div>" .
 		"<div class='endhaltestelle col-xs-6'>" . '%s' . "</div>" .
 		"<div class='wartezeit col-xs-pull-2 col-xs-3 '>" . '%d\'' . "</div></div>";
@@ -146,7 +148,7 @@
 
 		function printdauer($wartezeitankunft, $tramnr)
 		{
-
+			
 			$endhaltstellen = [17 => "Werdhölzli", 13 => "Frankental", 5 => "Laubegg"];
 			$trBD = sprintf($GLOBALS['tramAnkunftFormat'], $tramnr, $endhaltstellen[$tramnr], $GLOBALS['warteZeit'][$tramnr]);
 			$trND = sprintf($GLOBALS['standardFormat'], $tramnr, $endhaltstellen[$tramnr], $GLOBALS['warteZeit'][$tramnr] / 60);
@@ -160,7 +162,7 @@
 				echo $trND;
 
 			}
-
+			return $tramnr;
 		}
 
 		// Nicht Iterativ
@@ -181,7 +183,7 @@
 
 	}
 
-	//Hier sind meine Function Calls.
+	// Hier sind meine Function Calls.
 
 	$haltestelle = new Haltestelle;
 
